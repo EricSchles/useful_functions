@@ -4,7 +4,6 @@ def remove_all(listing,x):
     return listing
 
 def impose_ordering(ordering,listing):
-    tmp = [x for x in listing if x in ordering]
     new_listing = []
     for elem in ordering:
         
