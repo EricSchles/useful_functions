@@ -11,3 +11,4 @@ def impose_ordering(ordering,listing):
     if len(ordering) < len(listing):
         new_listing += listing[len(ordering)-1:]
     return new_listing
+
