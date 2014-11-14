@@ -12,3 +12,10 @@ def impose_ordering(ordering,listing):
         new_listing += listing[len(ordering)-1:]
     return new_listing
 
+def fuzz_by_whitespace(text):
+    characters = [x for x in text]
+    between_all = [] #whitespace between all characters
+    for i in characters:
+        between_all.append(' ')
+        between_all.append(i)
+    return between_all
