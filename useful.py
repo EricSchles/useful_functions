@@ -32,3 +32,40 @@ def fuzz_by_whitespace(text):
                     record.append(elem)
         records.append(record)
     return records
+
+def fuzzer_by_whitespace(text):
+    characters = [x for x in text]
+    total_num_spaces = len(characters) #it's -2 because we leave off the ends
+    records = []
+    for iteration in xrange(total_num_spaces):
+        for num_whitespace in xrange(total_num_spaces):
+            greater_record = []
+            lesser_record = []
+            for ind,elem in enumerate(characters):
+                if iteration == 0:
+                    if not ind == 0:
+                        greater_record.append(' ')
+                    greater_record.append(elem)
+                    
+                else:
+                    if ind > num_whitespace:
+                        if ind != 0:
+                            greater_record.append(' ')
+                    greater_record.append(elem)
+                    if ind < num_whitespace:
+                        if ind != 0:
+                            lesser_record.append(' ')
+                    lesser_record.append(elem)
+            if greater_record != []:
+                records.append(greater_record)
+            if lesser_record != []:
+                records.append(lesser_record)
+    
+    final = []
+    for i in records:
+        if not i in final:
+            final.append(i)
+    return final
+
+for i in fuzz_by_whitespace("Hello"):
+    print i
