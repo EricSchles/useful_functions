@@ -81,13 +81,20 @@ def fuzz_by_whitespace(text):
     total_num_spaces = len(characters) #it's -2 because we leave off the ends
     full_spaces = []
     records = []
+    
     for ind,elem in enumerate(characters):
         if ind != 0:
             full_spaces.append(' ')
         full_spaces.append(elem)
     records.append(full_spaces)
+    text = full_spaces[:]
     while text.count(' ') > original_num_spaces:
-        tmp
+        tmp = text
+        while tmp.count(' ') > original_num_spaces+1:
+            tmp = remove_last_space(tmp)
+            records.append(tmp)
+        text = remove_first_space(text)
+    return records
 
 def remove_first_space(text):
     text = ''.join(text)
