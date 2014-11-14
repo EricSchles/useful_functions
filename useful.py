@@ -100,13 +100,13 @@ def remove_first_space(text):
     text = ''.join(text)
     kth = text.find(" ")
     new_text = text[:kth] + text[kth+1:]
-    return new_text.split()
+    return [x for x in new_text]
 
 def remove_last_space(text):
     text = ''.join(text)
     kth = text.rfind(" ")
     new_text = text[:kth] + text[kth+1:]
-    return new_text.split()
+    return [x for x in new_text]
 
 for i in fuzz_by_whitespace("Hello"):
     print i
