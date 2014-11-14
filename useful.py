@@ -14,7 +14,7 @@ def impose_ordering(ordering,listing):
 
 def fuzz_by_whitespace(text):
     characters = [x for x in text]
-    between_all = [] #whitespace between all characters
+    total_num_spaces = len(characters)-2 #it's -2 because we leave off the ends
     for i in characters:
         between_all.append(' ')
         between_all.append(i)
