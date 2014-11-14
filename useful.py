@@ -21,12 +21,14 @@ def fuzz_by_whitespace(text):
             record = []
             for ind,elem in enumerate(characters):
                 if iteration == 0:
-                    record.append(' ')
+                    if not ind == 0:
+                        record.append(' ')
                     record.append(elem)
                     
                 else:
                     if ind < num_whitespace:
-                        record.append(' ')
+                        if not ind == 0:
+                            record.append(' ')
                     record.append(elem)
         records.append(record)
     return records
