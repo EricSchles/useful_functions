@@ -67,7 +67,7 @@ def fuzzer_by_whitespace(text):
             final.append(i)
     return final
 
-def fuzzer3_by_whitespace(text):
+def fuzz_by_whitespace(text):
     """
     algorithm:
     start with the original string
@@ -77,13 +77,29 @@ def fuzzer3_by_whitespace(text):
     remove any duplicates along the way
     """
     characters = [x for x in text]
+    original_num_spaces = characters.count(' ')
     total_num_spaces = len(characters) #it's -2 because we leave off the ends
     full_spaces = []
+    records = []
     for ind,elem in enumerate(characters):
         if ind != 0:
             full_spaces.append(' ')
         full_spaces.append(elem)
+    records.append(full_spaces)
+    while text.count(' ') > original_num_spaces:
+        tmp
 
+def remove_first_space(text):
+    text = ''.join(text)
+    kth = text.find(" ")
+    new_text = text[:kth] + text[kth+1:]
+    return new_text.split()
+
+def remove_last_space(text):
+    text = ''.join(text)
+    kth = text.rfind(" ")
+    new_text = text[:kth] + text[kth+1:]
+    return new_text.split()
 
 for i in fuzz_by_whitespace("Hello"):
     print i
