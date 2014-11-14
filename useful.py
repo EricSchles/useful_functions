@@ -15,7 +15,18 @@ def impose_ordering(ordering,listing):
 def fuzz_by_whitespace(text):
     characters = [x for x in text]
     total_num_spaces = len(characters)-2 #it's -2 because we leave off the ends
-    for i in characters:
-        between_all.append(' ')
-        between_all.append(i)
-    return between_all
+    records = []
+    for iteration in xrange(total_num_spaces):
+        for num_whitespace in xrange(total_num_spaces):
+            record = []
+            for ind,elem in enumerate(characters):
+                if iteration == 0:
+                    record.append(' ')
+                    record.append(elem)
+                    
+                else:
+                    if ind < num_whitespace:
+                        record.append(' ')
+                    record.append(elem)
+        records.append(record)
+    return records
