@@ -35,7 +35,7 @@ def fuzz_by_whitespace(text):
 
 def fuzzer_by_whitespace(text):
     characters = [x for x in text]
-    total_num_spaces = len(characters) #it's -2 because we leave off the ends
+    total_num_spaces = len(characters) 
     records = []
     for iteration in xrange(total_num_spaces):
         for num_whitespace in xrange(total_num_spaces):
@@ -78,10 +78,10 @@ def fuzz_by_whitespace(text):
     """
     characters = [x for x in text]
     original_num_spaces = characters.count(' ')
-    total_num_spaces = len(characters) #it's -2 because we leave off the ends
+    total_num_spaces = len(characters) 
     full_spaces = []
     records = []
-    
+    records.append([x for x in text])
     for ind,elem in enumerate(characters):
         if ind != 0:
             full_spaces.append(' ')
@@ -90,23 +90,43 @@ def fuzz_by_whitespace(text):
     text = full_spaces[:]
     while text.count(' ') > original_num_spaces:
         tmp = text
-        while tmp.count(' ') > original_num_spaces+1:
-            tmp = remove_last_space(tmp)
+        while tmp.count(' ') > original_num_spaces:
             records.append(tmp)
+            tmp = remove_last_space(tmp)
+            if not tmp in records:
+                records.append(tmp)
         text = remove_first_space(text)
-    return records
+    final = []
+    for ind,record in enumerate(records):
+        records_tmp = records[ind:]
+        if records_tmp.count(record) > 1:
+            continue
+        else:
+            final.append(record)
+    final_text = []
+    for i in final:
+        final_text.append(''.join(i))
+    return final_text
 
 def remove_first_space(text):
     text = ''.join(text)
     kth = text.find(" ")
-    new_text = text[:kth] + text[kth+1:]
+    if text[kth+1] == ' ':
+        if text[kth+2] == ' ':
+            new_text = text[:kth] + " " + text[kth+3:]
+        else:
+            new_text = text[:kth] + " " + text[kth+2:] 
+    else:
+        new_text = text[:kth] + text[kth+1:]
     return [x for x in new_text]
-
+     
 def remove_last_space(text):
     text = ''.join(text)
     kth = text.rfind(" ")
     new_text = text[:kth] + text[kth+1:]
     return [x for x in new_text]
 
-for i in fuzz_by_whitespace("Hello"):
+
+#fuzz_by_whitespace("Hello there")
+for i in fuzz_by_whitespace("Hello there friends how are you?"):
     print i
