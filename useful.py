@@ -107,7 +107,7 @@ def fuzz_by_whitespace(text):
     for i in final:
         final_text.append(''.join(i))
     return final_text
-
+#The issue is that the actual spaces in the string are being removed as well.
 def remove_first_space(text):
     text = ''.join(text)
     kth = text.find(" ")
