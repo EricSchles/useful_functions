@@ -12,60 +12,6 @@ def impose_ordering(ordering,listing):
         new_listing += listing[len(ordering)-1:]
     return new_listing
 
-def fuzz_by_whitespace(text):
-    characters = [x for x in text]
-    total_num_spaces = len(characters)-2 #it's -2 because we leave off the ends
-    records = []
-    for iteration in xrange(total_num_spaces):
-        for num_whitespace in xrange(total_num_spaces):
-            record = []
-            for ind,elem in enumerate(characters):
-                if iteration == 0:
-                    if not ind == 0:
-                        record.append(' ')
-                    record.append(elem)
-                    
-                else:
-                    if ind < num_whitespace:
-                        if not ind == 0:
-                            record.append(' ')
-                    record.append(elem)
-        records.append(record)
-    return records
-
-def fuzzer_by_whitespace(text):
-    characters = [x for x in text]
-    total_num_spaces = len(characters) 
-    records = []
-    for iteration in xrange(total_num_spaces):
-        for num_whitespace in xrange(total_num_spaces):
-            greater_record = []
-            lesser_record = []
-            for ind,elem in enumerate(characters):
-                if iteration == 0:
-                    if not ind == 0:
-                        greater_record.append(' ')
-                    greater_record.append(elem)
-                    
-                else:
-                    if ind > num_whitespace:
-                        if ind != 0:
-                            greater_record.append(' ')
-                    greater_record.append(elem)
-                    if ind < num_whitespace:
-                        if ind != 0:
-                            lesser_record.append(' ')
-                    lesser_record.append(elem)
-            if greater_record != []:
-                records.append(greater_record)
-            if lesser_record != []:
-                records.append(lesser_record)
-    
-    final = []
-    for i in records:
-        if not i in final:
-            final.append(i)
-    return final
 
 def fuzz_by_whitespace(text):
     """
@@ -95,8 +41,10 @@ def fuzz_by_whitespace(text):
             tmp = remove_last_space(tmp)
             if not tmp in records:
                 records.append(tmp)
+
         text = remove_first_space(text)
     final = []
+
     for ind,record in enumerate(records):
         records_tmp = records[ind:]
         if records_tmp.count(record) > 1:
@@ -127,6 +75,12 @@ def remove_last_space(text):
     return [x for x in new_text]
 
 
-#fuzz_by_whitespace("Hello there")
-for i in fuzz_by_whitespace("Hello there friends how are you?"):
-    print i
+def file_len(fname):
+    with open(fname,"r") as f:
+        i = 0
+        for i,l in enumerate(f):
+            pass
+    if i == 0:
+        return i
+    else:
+        return i +1
