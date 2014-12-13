@@ -1,3 +1,5 @@
+import os
+
 def remove_all(listing,x):
     while x in listing:
         listing.remove(x)
@@ -84,3 +86,19 @@ def file_len(fname):
         return i
     else:
         return i +1
+
+def traverse_apply(root,func=lambda x:x):
+    results = []
+    if type(root) != type([]):
+        for rootdir,dir,files in os.walk(root):
+            for file in files:
+                file = os.path.join(rootdir,file)
+                results.append(func(file))
+    else:
+        for root in roots:
+            for rootdir,dir,files in os.walk(root):
+                for file in files:
+                    file = os.path.join(rootdir,file)
+                    results.append(func(file))
+    return results
+                
